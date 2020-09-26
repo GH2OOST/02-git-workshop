@@ -3,10 +3,12 @@
 #include "buzzer.h"
 
 #define PIN_BUTTON_MEL_ONE 3
+#define PIN_BUTTON_MEL_TWO 4
 #define PIN_BUTTON_OFF 5
 #define PIN_BUZZER 6
 
 Button buttonMelodyOne(PIN_BUTTON_MEL_ONE);
+Button buttonMelodyTwo(PIN_BUTTON_MEL_TWO);
 Button buttonOff(PIN_BUTTON_OFF);
 Buzzer buzzer(PIN_BUZZER);
 
@@ -23,6 +25,10 @@ int melodyLength = 4;
 // double durations2[] = {4, 1, 4, 1};
 // int melodyLength2 = 4;
 
+int notes3[] = {NOTE_E5, NOTE_DS5, NOTE_E5, NOTE_DS5, NOTE_E5, NOTE_B4, NOTE_D5, NOTE_C5, NOTE_A4};
+double durations3[] = {2, 2, 2, 2, 2, 2, 2, 2, 10};
+int melodyLength3 = 9;
+
 void setup()
 {
     buzzer.setMelody(notes, durations, melodyLength);
@@ -33,6 +39,7 @@ void loop()
     buzzer.playSound();
 
     if (buttonOff.wasPressed())
+ 
     {
         buzzer.turnSoundOff();
     }
@@ -40,6 +47,12 @@ void loop()
     if (buttonMelodyOne.wasPressed())
     {
         buzzer.setMelody(notes, durations, melodyLength);
+        buzzer.turnSoundOn();
+    }
+
+    if (buttonMelodyTwo.wasPressed())
+    {
+        buzzer.setMelody(notes3, durations3, melodyLength3);
         buzzer.turnSoundOn();
     }
 }
